@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven_3.8.5'
+        jdk 'JDK11'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                
+                git url: 'https://github.com/amsavalli1429/RestAssueredBookApi.git', branch: 'main'
+               
+            }
+        }
+
+        stage('Build & Test') {
+            steps {
+                sh 'mvn clean test'
+            }
+            post {
+                always {
+                    junit '**/target/surefire-reports/*.xml'
+                    archiveArtifacts artifacts: 'target/*.jar', allowEmptyArchive: true
+                }
+            }
+        }
+    }
+
+    post {
+        failure {
+            echo 'Build or tests failed!'
+        }
+        success {
+            echo 'Build and tests passed successfully.'
+        }
+    }
+}

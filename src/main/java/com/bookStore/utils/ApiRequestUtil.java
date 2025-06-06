@@ -9,10 +9,15 @@ public class ApiRequestUtil {
 
     public static Response postRequest(Object body, String endpoint) {
         return given()
-                .baseUri(ApiConstants.BASE_URI)
-                .contentType(ApiConstants.CONTENT_TYPE)
-                .body(body)
-                .when()
-                .post(endpoint);
+        .baseUri(ApiConstants.BASE_URI)
+        .contentType(ApiConstants.CONTENT_TYPE)
+        .body(body)
+        .log().all() 
+        .when()
+        .post(endpoint)
+        .then()
+        .log().all()  
+        .extract()
+        .response();
     }
 }

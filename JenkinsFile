@@ -2,16 +2,14 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven_3.8.5'
-        jdk 'JDK11'
+        maven 'Maven_3.8.5'    // Make sure Jenkins has this tool configured
+        jdk 'JDK11'            // Make sure JDK11 is configured in Jenkins Global Tools
     }
 
     stages {
         stage('Checkout') {
             steps {
-                
                 git url: 'https://github.com/amsavalli1429/RestAssueredBookApi.git', branch: 'main'
-               
             }
         }
 
@@ -29,11 +27,11 @@ pipeline {
     }
 
     post {
-        failure {
-            echo 'Build or tests failed!'
-        }
         success {
-            echo 'Build and tests passed successfully.'
+            echo ' Build and tests passed successfully.'
+        }
+        failure {
+            echo ' Build or tests failed!'
         }
     }
 }

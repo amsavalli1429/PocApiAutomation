@@ -18,7 +18,7 @@ public class ServerManager {
         }
 
         try {
-            System.out.println("🔄 Starting FastAPI server...");
+            System.out.println(" Starting FastAPI server...");
             ExtentReportUtil.step("INFO", "Starting FastAPI server...");
 
             ProcessBuilder pb = new ProcessBuilder("cmd.exe", "/c", "uvicorn main:app --reload");
@@ -30,7 +30,7 @@ public class ServerManager {
 
         } catch (IOException | InterruptedException e) {
             ExtentReportUtil.step("FAIL", "Server startup failed: " + e.getMessage());
-            throw new RuntimeException("❌ Failed to start server.", e);
+            throw new RuntimeException(" Failed to start server.", e);
         }
     }
 
@@ -38,7 +38,7 @@ public class ServerManager {
     public static void stopServer() {
         if (serverProcess != null) {
             serverProcess.destroy();
-            System.out.println("🛑 FastAPI server stopped.");
+            System.out.println(" FastAPI server stopped.");
             ExtentReportUtil.step("INFO", "FastAPI server stopped.");
         }
     }
@@ -48,13 +48,13 @@ public class ServerManager {
         int retries = 10;
         for (int i = 0; i < retries; i++) {
             if (isServerRunning()) {
-                System.out.println("✅ FastAPI server is up!");
+                System.out.println(" FastAPI server is up!");
                 ExtentReportUtil.step("PASS", "FastAPI server is running.");
                 return;
             }
             Thread.sleep(1000);
         }
-        throw new RuntimeException("❌ Server did not start within expected time.");
+        throw new RuntimeException(" Server did not start within expected time.");
     }
 
     private static boolean isServerRunning() {
@@ -78,7 +78,7 @@ public class ServerManager {
                     System.out.println("[FastAPI] " + line);
                 }
             } catch (IOException e) {
-                System.err.println("❗ Error reading server logs: " + e.getMessage());
+                System.err.println(" Error reading server logs: " + e.getMessage());
             }
         }).start();
     }

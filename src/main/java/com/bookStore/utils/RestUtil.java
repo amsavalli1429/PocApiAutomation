@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 public class RestUtil {
 
     static {
-        // Base URI initialization (only once)
+       
         RestAssured.baseURI = ApiConstants.BASE_URI;
     }
 
@@ -47,4 +47,13 @@ public class RestUtil {
                 .when()
                 .delete(endpoint);
     }
+
+    public static Response getWithHeaders(String endpoint, Map<String, String> headers) {
+    return given()
+            .headers(headers)
+            .when()
+            .get(endpoint);
+}
+
+
 }

@@ -2,8 +2,8 @@
 <suite name="Bookstore API Test Suite" verbose="1" parallel="false">
     <test name="Bookstore API Tests">
         <classes>
-            <class name="com.bookstore.tests.AuthTest"/>
-            <class name="com.bookstore.tests.BookTest"/>
+            <class name="com.bookstore.tests.bookstore.stepdefs.BokkManagementTestNG"/>
+            <class name="com.bookstore.tests.bookstore.stepdefs.AuthTestNGTests"/>
         </classes>
     </test>
 </suite>
